@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=true" />
+		<property name="username" value="root" />
+		<property name="password" value="1234" />
+ 		<!-- 初始化物理连接数 -->
+	<!--	<property name="initialSize" value="${jdbc.initialSize}" />
+		连接池最大数量
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		连接池最大空闲
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		连接池最小空闲
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		获取连接最大等待时间
+		<property name="maxWait" value="${jdbc.maxWait}" /> -->
+	</bean>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- setter注入 -->
+	<bean id="user1" class="com.lh.pojo.User">
+		<constructor-arg name="name" value="test1"></constructor-arg>
+		<constructor-arg name="email" value="liuhaom@yonyou.com"></constructor-arg>
+	</bean>
+	<!-- setter注入 -->
+	<bean id="user2" class="com.lh.pojo.User">
+		<property name="name" value="test2"></property>
+		<property name="email" value="liuhaom@yonyou.com"></property>
+	</bean>
+
+</beans>
